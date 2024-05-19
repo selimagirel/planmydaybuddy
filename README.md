@@ -1,3 +1,11 @@
+
+
+
+<img width="1424" alt="Ekran Resmi 2024-05-19 18 18 49" src="https://github.com/selimagirel/planmydaybuddy/assets/44299885/39e79b8e-2999-4d6c-a432-7ffac6a9e22e">
+
+[`PlanBuddy`](https://planmydaybuddy.vercel.app/)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
