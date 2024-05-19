@@ -83,14 +83,14 @@ export default function Page() {
               </Button>
             </form>
             <Button
-              className="rounded-md bg-primary px-4 py-2 text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className=""
               onClick={async () => {
                 const result = await generateTasks(inputValue, apiKey);
 
                 setGeneration(result);
               }}
             >
-              Generate
+              Plan
             </Button>
           </div>
         </div>
