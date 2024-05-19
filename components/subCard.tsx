@@ -31,7 +31,7 @@ import {
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Clock9Icon, Trash2Icon } from "lucide-react";
-import { SubItemProps, generateSubtask } from "@/app/planner2/actions";
+import { SubItemProps, generateSubtask } from "@/app/planner/actions";
 
 export function SubCard({
   id,

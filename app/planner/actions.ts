@@ -1,7 +1,9 @@
 'use server'
 
 import { generateObject, generateText } from 'ai'
-import { openai } from '@ai-sdk/openai'
+// import { openai } from '@ai-sdk/openai'
+import { createOpenAI } from '@ai-sdk/openai';
+
 import { z } from 'zod'
 
 export type TodoItemProps = {
@@ -27,12 +29,17 @@ export type InfoItemProps = {
 };
 
 
-export async function generateTasks(content: string) {
+
+export async function generateTasks(content: string,api:string) {
   'use server'
+  const openai = createOpenAI({
+    // custom settings
+    apiKey: api,
+  });
 
 
   const result = await generateObject({
-    model: openai('gpt-4o'),
+    model: openai('gpt-3.5-turbo'),
     system: `"Generate a daily task list based on the user’s input ${content}. Each task should have the following structure:
     {
       "taskName": "Task Name",
@@ -92,10 +99,14 @@ export async function generateTasks(content: string) {
 
 export async function generateInfo(content: string) {
   'use server'
+  const openai = createOpenAI({
+    // custom settings
+    apiKey: process.env.OPENAI_API_KEY,
+  });
 
 
   const result2 = await generateObject({
-    model: openai('gpt-4o'),
+    model: openai('gpt-3.5-turbo'),
     system: `Generate detailed and relevant information about the task: ${content}. Ensure the information is specific to the nature of the task. For example:
 
     Input: "Prepare and eat a hearty breakfast to fuel the day's activities."
@@ -139,9 +150,14 @@ export async function generateInfo(content: string) {
 export async function generateSubtask(content: string) {
   'use server'
 
+  const openai = createOpenAI({
+    // custom settings
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+
 
   const result2 = await generateObject({
-    model: openai('gpt-4o'),
+    model: openai('gpt-3.5-turbo'),
     system: `Generate detailed and relevant subtasks for the following task: ${content}. If the task can be split, divide it into smaller, manageable subtasks; if not, leave it as is. dont forget to check the timing on the task`,
     messages: [{ role: "user", content: content }],
     schema: z.object({

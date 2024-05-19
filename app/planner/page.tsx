@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useUIState, useActions } from "ai/rsc";
 
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import { JSX, SVGProps } from "react";
 import { Input } from "@/components/ui/input";
 
 import Link from "next/link";
-import { ChevronDownIcon, HomeIcon } from "@radix-ui/react-icons";
+import { HomeIcon } from "@radix-ui/react-icons";
 import { TodoItemProps, generateTasks } from "./actions";
 import { Textarea } from "@/components/ui/textarea";
 import { TodoCardv4 } from "@/components/todocardv4";
@@ -16,6 +16,17 @@ import { TodoCardv4 } from "@/components/todocardv4";
 export default function Page() {
   const [inputValue, setInputValue] = useState("");
   const [generation, setGeneration] = useState<TodoItemProps[]>([]);
+  const [apiKey, setApiKey] = useState("");
+
+  const handleInputChange = (event: any) => {
+    setApiKey(event.target.value);
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    // Save the API key in an environment variable or use it directly in your application
+    process.env.OPENAI_API_KEY = apiKey;
+  };
 
   return (
     <div
@@ -36,7 +47,7 @@ export default function Page() {
           <div className="text-center space-y-2 mb-4">
             {/* <h1 className="text-3xl font-bold">Daily Tasks</h1> */}
             <p className="text-gray-500 dark:text-gray-400">
-              Enter your day and let us generate your daily to-do list.
+              write your general structre of your day and let us Plan your day "first submit your api key".
             </p>
           </div>
           <div className="w-full">
@@ -44,6 +55,7 @@ export default function Page() {
               className="flex items-center mb-4"
               onSubmit={async (e) => {
                 setInputValue("");
+                process.env.OPENAI_API_KEY = apiKey;
               }}
             >
               <Textarea
@@ -55,10 +67,25 @@ export default function Page() {
                 }}
               />
             </form>
+            <form onSubmit={handleSubmit}>
+              <label>
+                API Key:
+                <input
+                  className="border"
+                  type="text"
+                  value={apiKey}
+                  placeholder="Write your own api key"
+                  onChange={handleInputChange}
+                />
+              </label>
+              <Button type="submit" value="Submit" className="ml-3">
+                Submit
+              </Button>
+            </form>
             <Button
               className="rounded-md bg-primary px-4 py-2 text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               onClick={async () => {
-                const result = await generateTasks(inputValue);
+                const result = await generateTasks(inputValue, apiKey);
 
                 setGeneration(result);
               }}
