@@ -5,12 +5,12 @@ const CTA = () => (
     <div className='custom-screen' id="first-section">
       <div className='max-w-2xl mx-auto text-center'>
         <h2
-          className='text-gray-800 text-3xl font-semibold sm:text-4xl'
+          className=' text-3xl font-semibold sm:text-4xl'
           id='oss'
         >
           <Sparkles /> PlanBuddy is Proudly Open Source
         </h2>
-        <p className='mt-3 text-gray-600'>
+        <p className='mt-3 '>
           Our source code is available on GitHub.
         </p>
         <a
