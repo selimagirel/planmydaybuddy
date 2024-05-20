@@ -1,3 +1,5 @@
+import { Sparkles } from "lucide-react";
+
 const CTA = () => (
   <SectionWrapper>
     <div className='custom-screen' id="first-section">
@@ -6,7 +8,7 @@ const CTA = () => (
           className='text-gray-800 text-3xl font-semibold sm:text-4xl'
           id='oss'
         >
-          PlanBuddy is Proudly Open Source
+          <Sparkles /> PlanBuddy is Proudly Open Source
         </h2>
         <p className='mt-3 text-gray-600'>
           Our source code is available on GitHub.

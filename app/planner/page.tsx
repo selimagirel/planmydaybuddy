@@ -1,17 +1,17 @@
 "use client";
 
-import { SetStateAction, useEffect, useState } from "react";
-import { useUIState, useActions } from "ai/rsc";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { JSX, SVGProps } from "react";
-import { Input } from "@/components/ui/input";
 
 import Link from "next/link";
 import { HomeIcon } from "@radix-ui/react-icons";
 import { TodoItemProps, generateTasks } from "./actions";
 import { Textarea } from "@/components/ui/textarea";
 import { TodoCardv4 } from "@/components/todocardv4";
+import { toast } from "sonner";
+import { ModeToggle } from "@/components/toggleMode";
 
 export default function Page() {
   const [inputValue, setInputValue] = useState("");
@@ -43,14 +43,46 @@ export default function Page() {
               <HomeIcon className="h-4 w-4 mr-2" />
               Home
             </Link>
+            <ModeToggle />
           </div>
           <div className="text-center space-y-2 mb-4">
-            {/* <h1 className="text-3xl font-bold">Daily Tasks</h1> */}
+            <h1 className="text-3xl font-bold">Plan Buddy</h1>
             <p className="text-gray-500 dark:text-gray-400">
-              write your general structre of your day and let us Plan your day "first submit your api key".
+              To help you organize your day, please follow these steps: submit
+              your API key, outline your general daily structure, and receive a
+              productive daily plan.
             </p>
           </div>
           <div className="w-full">
+            <form onSubmit={handleSubmit} className="flex justify-center">
+              <label className="">
+                <span className="mr-2">API KEY</span>
+                <input
+                  className="border bg-slate-50"
+                  type="text"
+                  value={apiKey}
+                  placeholder="Write your own api key"
+                  onChange={handleInputChange}
+                />
+                <Button
+                  type="submit"
+                  value="Submit"
+                  variant="outline"
+                  className="ml-3 mb-2"
+                  onClick={() =>
+                    toast("API key submited", {
+                      description: "Now you can start planning!",
+                      action: {
+                        label: "Close",
+                        onClick: () => console.log("Close"),
+                      },
+                    })
+                  }
+                >
+                  Submit
+                </Button>
+              </label>
+            </form>
             <form
               className="flex items-center mb-4"
               onSubmit={async (e) => {
@@ -60,27 +92,12 @@ export default function Page() {
             >
               <Textarea
                 className="rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary flex-1 mr-4"
-                placeholder="Write your day here"
+                placeholder=" For example, Your day might look like this: wake up at 6 AM, breakfast at 7 AM, work until 9 AM, school, return by 4 PM, study until 11 PM."
                 value={inputValue}
                 onChange={(event) => {
                   setInputValue(event.target.value);
                 }}
               />
-            </form>
-            <form onSubmit={handleSubmit}>
-              <label>
-                API Key:
-                <input
-                  className="border"
-                  type="text"
-                  value={apiKey}
-                  placeholder="Write your own api key"
-                  onChange={handleInputChange}
-                />
-              </label>
-              <Button type="submit" value="Submit" className="ml-3">
-                Submit
-              </Button>
             </form>
             <Button
               className=""
@@ -90,7 +107,7 @@ export default function Page() {
                 setGeneration(result);
               }}
             >
-              Plan
+              Start Planning
             </Button>
           </div>
         </div>

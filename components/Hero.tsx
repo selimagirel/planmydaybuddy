@@ -1,5 +1,6 @@
 'use client';
 
+import { Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -34,14 +35,15 @@ export default function Hero() {
               className='ml-2 inline-flex items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300 mr-2'
               scroll={false}
             >
-              Github
+              Github 
+              <Star className='h-4 w-4 ml-2'/>
             </Link>
           </div>
         </div>
         <div className=''>
           <Image
             src='/3.png'
-            className='rounded-2xl border'
+            className='rounded-2xl border mr-10 mb-10'
             alt='hero'
             width={700}
             height={700}
