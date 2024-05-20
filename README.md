@@ -20,3 +20,4 @@
 This app lets people Plan their perfect productive day.
 
 - soon will be updated!
+- there are some bugs that need to be fix
