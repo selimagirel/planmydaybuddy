@@ -24,7 +24,7 @@ export default function Hero() {
           </p>
           <div className='flex items-center justify-center gap-x-3 font-medium text-sm'>
             <Link
-              href='/planner'
+              href='/planner2'
               className='ml-2 inline-flex items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300 mr-2'
             >
               Start Planning
@@ -42,7 +42,7 @@ export default function Hero() {
         </div>
         <div className=''>
           <Image
-            src='/3.png'
+            src='/hero2.png'
             className='rounded-2xl border mr-10 mb-10'
             alt='hero'
             width={700}

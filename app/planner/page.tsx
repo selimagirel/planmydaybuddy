@@ -11,21 +11,36 @@ import { TodoItemProps, generateTasks } from "./actions";
 import { Textarea } from "@/components/ui/textarea";
 import { TodoCardv4 } from "@/components/todocardv4";
 import { toast } from "sonner";
-import { ModeToggle } from "@/components/toggleMode";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Page() {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string>("");
   const [generation, setGeneration] = useState<TodoItemProps[]>([]);
   const [apiKey, setApiKey] = useState("");
 
-  const handleInputChange = (event: any) => {
+  // const handleInputChange = (event: any) => {
+  //   setApiKey(event.target.value);
+  // };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setApiKey(event.target.value);
   };
 
-  const handleSubmit = (event: any) => {
+  // const handleSubmit = (event: any) => {
+  //   event.preventDefault();
+  //   // Save the API key in an environment variable or use it directly in your application
+  //   process.env.OPENAI_API_KEY = apiKey;
+  // };
+
+  const handleApiKeySubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Save the API key in an environment variable or use it directly in your application
-    process.env.OPENAI_API_KEY = apiKey;
+    toast("API key submitted", {
+      description: "Now you can start planning!",
+      action: {
+        label: "Close",
+        onClick: () => console.log("Close"),
+      },
+    });
   };
 
   return (
@@ -43,7 +58,7 @@ export default function Page() {
               <HomeIcon className="h-4 w-4 mr-2" />
               Home
             </Link>
-            <ModeToggle />
+            <ThemeToggle />
           </div>
           <div className="text-center space-y-2 mb-4">
             <h1 className="text-3xl font-bold">Plan Buddy</h1>
@@ -54,7 +69,7 @@ export default function Page() {
             </p>
           </div>
           <div className="w-full">
-            <form onSubmit={handleSubmit} className="flex justify-center">
+            <form onSubmit={handleApiKeySubmit} className="flex justify-center">
               <label className="">
                 <span className="mr-2">API KEY</span>
                 <input
@@ -69,15 +84,6 @@ export default function Page() {
                   value="Submit"
                   variant="outline"
                   className="ml-3 mb-2"
-                  onClick={() =>
-                    toast("API key submited", {
-                      description: "Now you can start planning!",
-                      action: {
-                        label: "Close",
-                        onClick: () => console.log("Close"),
-                      },
-                    })
-                  }
                 >
                   Submit
                 </Button>
@@ -102,6 +108,7 @@ export default function Page() {
             <Button
               className=""
               onClick={async () => {
+                
                 const result = await generateTasks(inputValue, apiKey);
 
                 setGeneration(result);
@@ -112,10 +119,10 @@ export default function Page() {
           </div>
         </div>
         <div className="max-h-[450px] overflow-auto space-y-2 w-[700px]">
-          {generation.map((todo: TodoItemProps, index: number) => (
+          {generation.map((todo: TodoItemProps) => (
             <div
               className="w-full max-w-6xl max-h-[500px] overflow-auto"
-              key={index}
+              key={todo.id}
             >
               <TodoCardv4
                 id={todo.id}
@@ -124,7 +131,7 @@ export default function Page() {
                 startTime={todo.startTime}
                 endTime={todo.endTime}
                 info={todo.info}
-                key={index}
+                key={todo.id}
                 prioritization={todo.prioritization}
               />
             </div>
