@@ -6,7 +6,14 @@ import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "./theme-provider";
 import { Header } from "@/components/layout/header";
 import { cn } from "@/lib/utils";
-
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
+import { HeaderSignIn } from "@/components/layout/header sign-in";
 const inter = Inter({ subsets: ["latin"] });
 
 let title = "Plan Buddy";
@@ -40,18 +47,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn((inter.className, ""))}>
-        <ThemeProvider attribute="class" enableSystem>
-          <Header />
-          <div className="h-full flex flex-col justify-between">
-            {children}
-            
-            <Footer />
-          </div>
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={cn((inter.className, ""))}>
+          <ThemeProvider attribute="class" enableSystem>
+            <SignedOut><Header/></SignedOut>
+            <SignedIn><HeaderSignIn/></SignedIn>
+            <div className="h-full flex flex-col justify-between">
+              {children}
+              <Footer />
+            </div>
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
+    
   );
 }

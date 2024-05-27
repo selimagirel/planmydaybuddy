@@ -3,9 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
 import Link from "next/link";
 import { ThemeToggle } from "../theme-toggle";
-
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 export const Header: FC = () => {
   return (
+    
     <header className="flex w-full top-0 h-[var(--navbar-height)] items-center gap-4 px-4 md:px-6 border-gray-200 dark:border-primary-foreground bg-white dark:bg-background  backdrop-blur-lg transition-all z-[9999999]">
       <nav className="flex-col gap-6 text-lg h- font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 w-screen">
         <div className="flex items-center justify-between w-full gap-5 ">
@@ -18,10 +25,17 @@ export const Header: FC = () => {
             </Link>
           </div>
           <div className="md:space-x-5 shrink-0 flex ml-auto">
-            {/* <Button className="md:flex hidden" variant="outline" size="sm">
-              Register
+            <Button className="md:flex hidden" variant="outline" size="sm">
+              <Link href="/sign-up">
+                Register
+              </Link>
+              
             </Button>
-            <Button size="sm">Login</Button> */}
+            <Button className="md:flex hidden" variant="outline">
+              <Link href="/sign-in">
+                Login
+              </Link>
+            </Button>
             <ThemeToggle />
           </div>
         </div>

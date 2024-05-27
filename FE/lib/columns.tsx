@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/components/tanstack-react-table/data-table-column-header";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { TodoItemProps } from "@/app/planner2/actions";
+import { TodoItemProps } from "@/app/dashboard/actions";
 
 type TodoType = {
   id: string;

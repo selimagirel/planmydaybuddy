@@ -4,7 +4,7 @@ import { todoColumns } from "@/lib/columns";
 import { DataTable } from "../tanstack-react-table/data-table";
 import { useState } from "react";
 import { Card } from "../ui/card";
-import { TodoItemProps } from "@/app/planner2/actions";
+import { TodoItemProps } from "@/app/dashboard/actions";
 
 type TodoTableProps = {
   todos: TodoItemProps[];
